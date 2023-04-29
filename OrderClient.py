@@ -1,5 +1,5 @@
 import grpc
-import service_pb2
+import admin_pb2
 import service_pb2_grpc
 
 def create_order():
@@ -10,7 +10,7 @@ def create_order():
     client_id = input("Enter Client ID: ")
     data = input("Enter Order data (in JSON format): ")
 
-    order = service_pb2.Order(OID=order_id, CID=client_id, data=data)
+    order = admin_pb2.Order(OID=order_id, CID=client_id, data=data)
     reply = stub.CreateOrder(order)
 
     print(reply)
@@ -21,7 +21,7 @@ def retrieve_order():
 
     order_id = input("Enter Order ID: ")
 
-    order_id_message = service_pb2.ID(ID=order_id)
+    order_id_message = admin_pb2.ID(ID=order_id)
     order = stub.RetrieveOrder(order_id_message)
 
     print(order)
@@ -33,7 +33,7 @@ def update_order():
     order_id = input("Enter Order ID: ")
     data = input("Enter new Order data (in JSON format): ")
 
-    order = service_pb2.Order(OID=order_id, data=data)
+    order = admin_pb2.Order(OID=order_id, data=data)
     reply = stub.UpdateOrder(order)
 
     print(reply)
@@ -44,7 +44,7 @@ def delete_order():
 
     order_id = input("Enter Order ID: ")
 
-    order_id_message = service_pb2.ID(ID=order_id)
+    order_id_message = admin_pb2.ID(ID=order_id)
     reply = stub.DeleteOrder(order_id_message)
 
     print(reply)
@@ -55,7 +55,7 @@ def retrieve_client_orders():
 
     client_id = input("Enter Client ID: ")
 
-    client_id_message = service_pb2.ID(ID=client_id)
+    client_id_message = admin_pb2.ID(ID=client_id)
     orders = stub.RetrieveClientOrders(client_id_message)
 
     for order in orders:
