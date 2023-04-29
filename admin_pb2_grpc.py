@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import service_pb2 as service__pb2
+import admin_pb2 as admin__pb2
 
 
 class AdminPortalStub(object):
@@ -16,43 +16,43 @@ class AdminPortalStub(object):
         """
         self.CreateClient = channel.unary_unary(
                 '/project.AdminPortal/CreateClient',
-                request_serializer=service__pb2.Client.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Client.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.RetrieveClient = channel.unary_unary(
                 '/project.AdminPortal/RetrieveClient',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Client.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Client.FromString,
                 )
         self.UpdateClient = channel.unary_unary(
                 '/project.AdminPortal/UpdateClient',
-                request_serializer=service__pb2.Client.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Client.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.DeleteClient = channel.unary_unary(
                 '/project.AdminPortal/DeleteClient',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.CreateProduct = channel.unary_unary(
                 '/project.AdminPortal/CreateProduct',
-                request_serializer=service__pb2.Product.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Product.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.RetrieveProduct = channel.unary_unary(
                 '/project.AdminPortal/RetrieveProduct',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Product.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Product.FromString,
                 )
         self.UpdateProduct = channel.unary_unary(
                 '/project.AdminPortal/UpdateProduct',
-                request_serializer=service__pb2.Product.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Product.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.DeleteProduct = channel.unary_unary(
                 '/project.AdminPortal/DeleteProduct',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
 
 
@@ -112,43 +112,43 @@ def add_AdminPortalServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateClient': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateClient,
-                    request_deserializer=service__pb2.Client.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Client.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'RetrieveClient': grpc.unary_unary_rpc_method_handler(
                     servicer.RetrieveClient,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Client.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Client.SerializeToString,
             ),
             'UpdateClient': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateClient,
-                    request_deserializer=service__pb2.Client.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Client.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'DeleteClient': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteClient,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'CreateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateProduct,
-                    request_deserializer=service__pb2.Product.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Product.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'RetrieveProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.RetrieveProduct,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Product.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Product.SerializeToString,
             ),
             'UpdateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateProduct,
-                    request_deserializer=service__pb2.Product.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Product.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'DeleteProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteProduct,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -172,8 +172,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/CreateClient',
-            service__pb2.Client.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Client.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -189,8 +189,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/RetrieveClient',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Client.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Client.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -206,8 +206,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/UpdateClient',
-            service__pb2.Client.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Client.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -223,8 +223,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/DeleteClient',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -240,8 +240,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/CreateProduct',
-            service__pb2.Product.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Product.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -257,8 +257,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/RetrieveProduct',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Product.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Product.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -274,8 +274,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/UpdateProduct',
-            service__pb2.Product.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Product.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -291,8 +291,8 @@ class AdminPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.AdminPortal/DeleteProduct',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -308,28 +308,28 @@ class OrderPortalStub(object):
         """
         self.CreateOrder = channel.unary_unary(
                 '/project.OrderPortal/CreateOrder',
-                request_serializer=service__pb2.Order.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Order.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.RetrieveOrder = channel.unary_unary(
                 '/project.OrderPortal/RetrieveOrder',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Order.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Order.FromString,
                 )
         self.UpdateOrder = channel.unary_unary(
                 '/project.OrderPortal/UpdateOrder',
-                request_serializer=service__pb2.Order.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.Order.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.DeleteOrder = channel.unary_unary(
                 '/project.OrderPortal/DeleteOrder',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Reply.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Reply.FromString,
                 )
         self.RetrieveClientOrders = channel.unary_stream(
                 '/project.OrderPortal/RetrieveClientOrders',
-                request_serializer=service__pb2.ID.SerializeToString,
-                response_deserializer=service__pb2.Order.FromString,
+                request_serializer=admin__pb2.ID.SerializeToString,
+                response_deserializer=admin__pb2.Order.FromString,
                 )
 
 
@@ -371,28 +371,28 @@ def add_OrderPortalServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'CreateOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateOrder,
-                    request_deserializer=service__pb2.Order.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Order.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'RetrieveOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.RetrieveOrder,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Order.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Order.SerializeToString,
             ),
             'UpdateOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateOrder,
-                    request_deserializer=service__pb2.Order.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.Order.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'DeleteOrder': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteOrder,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Reply.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Reply.SerializeToString,
             ),
             'RetrieveClientOrders': grpc.unary_stream_rpc_method_handler(
                     servicer.RetrieveClientOrders,
-                    request_deserializer=service__pb2.ID.FromString,
-                    response_serializer=service__pb2.Order.SerializeToString,
+                    request_deserializer=admin__pb2.ID.FromString,
+                    response_serializer=admin__pb2.Order.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -416,8 +416,8 @@ class OrderPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.OrderPortal/CreateOrder',
-            service__pb2.Order.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Order.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -433,8 +433,8 @@ class OrderPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.OrderPortal/RetrieveOrder',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Order.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Order.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -450,8 +450,8 @@ class OrderPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.OrderPortal/UpdateOrder',
-            service__pb2.Order.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.Order.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -467,8 +467,8 @@ class OrderPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/project.OrderPortal/DeleteOrder',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Reply.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -484,7 +484,7 @@ class OrderPortal(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/project.OrderPortal/RetrieveClientOrders',
-            service__pb2.ID.SerializeToString,
-            service__pb2.Order.FromString,
+            admin__pb2.ID.SerializeToString,
+            admin__pb2.Order.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
