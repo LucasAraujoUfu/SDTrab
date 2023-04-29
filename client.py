@@ -2,6 +2,8 @@ import grpc
 import admin_pb2
 import admin_pb2_grpc
 
+import time
+
 # Cria um canal de gRPC apontando para o servidor em localhost:50051
 channel = grpc.insecure_channel('localhost:50051')
 
@@ -19,3 +21,20 @@ if response.error == 0:
     print("Client created successfully")
 else:
     print("Error creating client:", response.description)
+
+
+start_time = time.time()
+
+# Cria 10 novos clientes
+for i in range(10):
+    new_client_request = admin_pb2.Client(CID=str(i), data='{"name": "Alice"}')
+    response = admin_stub.CreateClient(new_client_request)
+    if response.error == 0:
+        print(f"Client {i} created successfully")
+    else:
+        print(f"Error creating client {i}:", response.description)
+
+end_time = time.time()
+
+print(f"Elapsed time: {end_time - start_time} seconds")
+
