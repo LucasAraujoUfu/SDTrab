@@ -1,10 +1,10 @@
 import grpc
 import admin_pb2
-import service_pb2_grpc
+import admin_pb2_grpc
 
 def create_order():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = service_pb2_grpc.OrderPortalStub(channel)
+    stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     order_id = input("Enter Order ID: ")
     client_id = input("Enter Client ID: ")
@@ -17,7 +17,7 @@ def create_order():
 
 def retrieve_order():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = service_pb2_grpc.OrderPortalStub(channel)
+    stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     order_id = input("Enter Order ID: ")
 
@@ -28,7 +28,7 @@ def retrieve_order():
 
 def update_order():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = service_pb2_grpc.OrderPortalStub(channel)
+    stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     order_id = input("Enter Order ID: ")
     data = input("Enter new Order data (in JSON format): ")
@@ -40,7 +40,7 @@ def update_order():
 
 def delete_order():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = service_pb2_grpc.OrderPortalStub(channel)
+    stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     order_id = input("Enter Order ID: ")
 
@@ -51,7 +51,7 @@ def delete_order():
 
 def retrieve_client_orders():
     channel = grpc.insecure_channel('localhost:50051')
-    stub = service_pb2_grpc.OrderPortalStub(channel)
+    stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     client_id = input("Enter Client ID: ")
 
