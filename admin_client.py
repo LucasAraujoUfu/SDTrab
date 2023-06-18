@@ -27,34 +27,43 @@ def run():
                 client = admin_pb2.Client(CID=f"{id}", data=f"{{'name': {nome}}}")
                 response = stub.CreateClient(client)
             elif op2 == 2:
-                id = input("Nome de usuario que será apagado: ")
-                response = stub.DeleteClient(admin_pb2.ID(ID=f"{id}"))
+                id = input("Id so usuario a ser atualizado: ")
+                nome = input("Novo nome: ")
+                client = admin_pb2.Client(CID=f"{id}", data=f"{{'name': {nome}}}")
+                response = stub.UpdateClient(client)
             elif op2 == 3:
-                id = input("Nome de usuario: ")
+                id = input("Id do usuario deseja recuperar: ")
                 response = stub.RetrieveClient(admin_pb2.ID(ID=f"{id}"))
                 print(response)
                 input("press ENTER")
             elif op2 == 4:
-                id = input("Qual id quer recuperar? ")
+                id = input("Id do usuario para ser apagado: ")
                 response = stub.DeleteClient(admin_pb2.ID(ID=f"{id}"))
                 input("Cliente deletado\nPress Enter")
         else:
             if op2 == 1:
-                id = input("qual o identificador do produto? ")
-                nome = input("Qual o nome do produto? ")
-                preco = float(input("Qual o valor do produto? R$ "))
-                qtd = int(input("Qual a quantidade desse produto no estoque? "))
-                product = admin_pb2.Product(PID='1', data=f"name: {nome}, price: {preco}, quantity: {qtd}")
+                id = input("Identificador do produto: ")
+                nome = input("Nome do produto: ")
+                preco = float(input("Valor do produto: R$ "))
+                qtd = int(input("Quantidade desse produto no estoque: "))
+                product = admin_pb2.Product(PID=f"{id}", data=f"name: {nome}, price: {preco}, quantity: {qtd}")
                 response = stub.CreateProduct(product)
             elif op2 == 2:
-                pass
+                id = input("Identificador do produto a ser atualizado: ")
+                nome = input("Nome do produto: ")
+                preco = float(input("Valor do produto: R$ "))
+                qtd = int(input("Quantidade desse produto no estoque: "))
+                product = admin_pb2.Product(PID=f"{id}", data=f"name: {nome}, price: {preco}, quantity: {qtd}")
+                response = stub.UpdateProduct(product)
             elif op2 == 3:
-                id = input("qual o id do produto que deseja recuperar? ")
+                id = input("Id do produto que deseja recuperar: ")
                 response = stub.RetrieveProduct(admin_pb2.ID(ID=f"{id}"))
                 print(response)
                 input("press Enter")
             elif op2 == 4:
-                pass
+                id = input("Id do produto que será apagado: ")
+                response = stub.DeleteProduct(admin_pb2.ID(ID=f"{id}"))
+                input("Produto deletado\npress Enter")
 
 
 def menu():

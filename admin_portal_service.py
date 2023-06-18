@@ -10,24 +10,15 @@ class AdminPortalService(AdminPortalServicer):
     def __init__(self):
         self.clients = {}
         self.products = {}
-        self.db_path = None
-        self.db = None
-        self.sync_obj = None
-
-    def __enter__(self):
+        self.db_path = 'database/'
         self.db = lmdb.open(self.db_path, map_size=10485760)
-        self.sync_obj = pysyncobj.SyncObj("0.0.0.0:12345", [self.db], use_fsync=True)
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.db.close()
-        self.sync_obj.stop()
+        # self.sync_obj = pysyncobj.SyncObj('127.0.0.1:12345', [self.db])
 
     def CreateClient(self, request, context):
         try:
             client = Client(request.CID, request.data)
 
-            client_json = json.dumps(client.to_dict())
+            client_json = json.dumps({"CID": client.CID, "data": client.data})
 
             with self.db.begin(write=True) as txn:
                 txn.put(client.CID.encode(), client_json.encode())
@@ -46,9 +37,9 @@ class AdminPortalService(AdminPortalServicer):
                 client = Client(client_dict['CID'], client_dict['data'])
                 return admin_pb2.Client(CID=client.CID, data=client.data)
             else:
-                return None
+                return admin_pb2.Client(CID='', data='')
         except lmdb.Error:
-            return None
+            return admin_pb2.Client(CID='', data='')
 
     def UpdateClient(self, request, context):
         try:
@@ -83,7 +74,7 @@ class AdminPortalService(AdminPortalServicer):
         try:
             product = Product(request.PID, request.data)
 
-            product_json = json.dumps(product.to_dict())
+            product_json = json.dumps({'PID': product.PID, 'data': product.data})
 
             with self.db.begin(write=True) as txn:
                 txn.put(product.PID.encode(), product_json.encode())
@@ -102,19 +93,19 @@ class AdminPortalService(AdminPortalServicer):
                 product = Product(product_dict['PID'], product_dict['data'])
                 return admin_pb2.Product(PID=product.PID, data=product.data)
             else:
-                return None
+                return admin_pb2.Product(PID="", data="")
         except lmdb.Error:
-            return None
+            return admin_pb2.Product(PID="", data="")
 
     def UpdateProduct(self, request, context):
         try:
             with self.db.begin(write=True) as txn:
-                product_json = txn.get(request.ID.encode())
+                product_json = txn.get(request.PID.encode())
 
                 if not product_json:
                     return admin_pb2.Reply(error=1, description="Product not found")
 
-                product_dict = json.loads(product_json.decode())
+                product_dict = {"PID": request.PID, "data": request.data}
 
                 txn.put(request.PID.encode(), json.dumps(product_dict).encode())
 
