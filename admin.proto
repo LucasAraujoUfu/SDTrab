@@ -53,7 +53,7 @@ service AdminPortal {
 }
 
 service OrderPortal {
-  rpc CreateOrder(Order) returns (Reply) {}
+  rpc (Order) returns (Reply) {}
   rpc RetrieveOrder(ID) returns (Order) {}
   rpc UpdateOrder(Order) returns (Reply) {}
   rpc DeleteOrder(ID) returns (Reply) {}

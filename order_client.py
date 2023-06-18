@@ -11,55 +11,83 @@ def run():
     stub = admin_pb2_grpc.OrderPortalStub(channel)
 
     products = {
-        "Cadeira": 3.5,
-        "Mesa": 6.,
-        "Cama": 4.75,
+        1: "Cadeira: 3.5",
+        2: "Mesa: 6. ",
+        3: "Cama: 4.75",
     }
 
     CID = input("Digite seu nome de usuario: ")
 
-    OID = (random.randint(0, 10000)+random.randint(0, 10000))
-
-    list_compra = []
-
     while True:
-        menu(products)
-        op = int(input("opção: "))
+        menu()
+        op = input("Opção: ")
 
-        if op == 0:
+        if op == '0':
             break
 
-        qtd = int(input("quantidade: "))
-        pName = list(products.keys())[op-1]
-        od = {
-            "PID": op-1,
-            "price": products[pName],
-            "quantity": qtd,
-        }
-        list_compra.append(json.dumps(od))
+        elif op == '1':
+            OID = (random.randint(0, 1000)+random.randint(0, 1000))
+            list_compra = []
+            print("Número da sua compra:", OID)
+            input("[OK]")
 
-    print(list_compra)
-    order = admin_pb2.Order(OID=f"{OID}", CID=CID, data=json.dumps(list_compra))
-    response = stub.CreateOrder(order)
-    print(order)
-    choice = input("Confirmar o pedido (S/N)? ")
-    if choice == 'N':
-        response = stub.DeleteOrder(admin_pb2.ID(ID=f"{OID}"))
-    else:
-        choice = input("Deseja Editar o pedido (S/N)? ")
-        if choice == 'S':
-            for i in list_compra:
-                it = json.loads(i)
-                print(it)
-        response = stub.RetrieveOrder(admin_pb2.ID(ID=f"{OID}"))
-        print(response)
+            while True:
+                menuCompra(products)
+                opc = int(input("Opção: "))
+                if opc == 0:
+                    break
+                else:
+                    qtd = input("Quantidade: ")
+                    list_compra.append({'PID': str(opc), 'price': qtd, 'quantity': qtd})
+
+            response = stub.CreateOrder(admin_pb2.Order(OID=str(OID), CID=CID, data=json.dumps(list_compra)))
+
+        elif op == '2':
+            OID = input("Número da compra: ")
+            response = stub.RetrieveOrder(admin_pb2.ID(ID=f"{OID}"))
+            print(response)
+            input("Press Enter")
+
+        elif op == '3':
+            OID = input("Número da compra: ")
+            response = stub.DeleteOrder(admin_pb2.ID(ID=f"{OID}"))
+            print("Compra cancelada")
+            input("Press Enter")
+
+        elif op == '4':
+            OID = input("Número da compra a ser editada: ")
+            list_compra = []
+
+            while True:
+                menuCompra(products)
+                opc = int(input("Opção: "))
+                if opc == 0:
+                    break
+                else:
+                    qtd = input("Quantidade: ")
+                    list_compra.append({'PID': str(opc), 'price': qtd, 'quantity': qtd})
+
+            response = stub.UpdateOrder(admin_pb2.Order(OID=str(OID), CID=CID, data=json.dumps(list_compra)))
+
+        elif op == '5':
+            pass
 
 
-def menu(prods: dict):
+def menuCompra(prods: dict):
     os.system("clear")
     print("O que deseja comprar?")
-    for j, i in enumerate(prods):
-        print(j+1, '-', i+':', prods[i])
+    for j, i in zip(prods.keys(), prods.values()):
+        print(j, i)
+    print("0 - Sair")
+
+
+def menu():
+    os.system("clear")
+    print("1 - Comprar")
+    print("2 - Vizualiar uma compra")
+    print("3 - Cancelar uma compra")
+    print("4 - Editar uma compra")
+    print("5 - Ver todas suas comprar")
     print("0 - Sair")
 
 

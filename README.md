@@ -62,4 +62,6 @@ python order_client.py
 
 OBS.: Os servidores trabalham idependente um do outro da mesma forma que os clientes, todavia vale ressaltar que o admin_client depende do admin_server da mesma forma que o order_client depende do order server.
 
+OBS2.: Esse programa faz syscalls as quais só foram testadas em sistema Linux e talvez essas não funcionem corretamente em outros sistemas.
+
 Video demonstrativo: [Link]
