@@ -2,7 +2,7 @@
 
 Para instalar o sistema primeiro é necessario instalar o python.
 
-Caso esteja em um sistema windows siga o seguinte passo a passo [Link]
+Caso esteja em um sistema windows siga o seguinte passo a passo [aqui](https://wiki.python.org/moin/BeginnersGuide/Download)
 
 A maioria das distribuições linux já ve com linux pre instalado, todavia em distribuições baseadas em debian basta executar 
 
@@ -32,12 +32,12 @@ pip install lmdb
 pip install pysyncobj
 ```
 
-Com as bibliotemas já instaladas agora você deve clonar este projeto em sua maquina. Para isso instale e configure o git (você pode seguir o sequinte tutorial [Link])
+Com as bibliotecas já instaladas agora você deve clonar este projeto em sua maquina. Para isso instale e configure o git (você pode seguir o sequinte [tutorial](https://git-scm.com/download/win))
 
 Agora no interpretador de comandos ou no bash do git, caso esteja em uma sistema windows, execute o seguinte comando
 
 ```commandline
-git clone <link desse repositorio>
+git clone https://github.com/LucasAraujoUfu/SDTrab.git
 ```
 
 Vá até a pasta onde o projeto foi clonado e execute os servidores
